@@ -1,36 +1,11 @@
-const express = require('express');
-const app = express();
-const PORT = process.env.PORT || 3000;
+const http = require('http');
 
-app.use(express.json());
+const PORT = 3000;
 
-// Root route
-app.get('/', (req, res) => {
-  res.json({
-    app: 'SkyNode',
-    version: '1.0.0',
-    status: 'running',
-    message: '🚀 Welcome to SkyNode API!',
-    timestamp: new Date().toISOString(),
-  });
+const server = http.createServer((req, res) => {
+  res.end('Server is running on port 3000 hehehahahah');
 });
 
-// Health check
-app.get('/health', (req, res) => {
-  res.json({ status: 'ok', uptime: process.uptime() });
-});
-
-// Sample route
-app.get('/api/greet/:name', (req, res) => {
-  const { name } = req.params;
-  res.json({ message: `Hello, ${name}! Welcome to SkyNode 🌤️` });
-});
-
-// 404 handler
-app.use((req, res) => {
-  res.status(404).json({ error: 'Route not found' });
-});
-
-app.listen(PORT, () => {
-  console.log(`✅  SkyNode is running at http://localhost:${PORT}`);
+server.listen(PORT, () => {
+  console.log('Server is running on port 3000');
 });
